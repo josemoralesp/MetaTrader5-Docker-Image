@@ -1,19 +1,26 @@
 #!/bin/bash
 
+# Function to display a graphical message
+show_message() {
+    echo $1
+}
+
+echo "vaaaaaloooorr"
+echo "${MT5_BROKER}"
 # Configuration variables
-mt5file='/config/.wine/drive_c/Program Files/FTMO MetaTrader 5/terminal64.exe'
+mt5file='/config/.wine/drive_c/Program Files/MetaTrader 5/terminal64.exe'
+mt5setup_url="https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5setup.exe"
+if [ ! -z "${MT5_BROKER}" ] && [ "${MT5_BROKER}" == "FTMO" ]; then
+    mt5file='/config/.wine/drive_c/Program Files/FTMO MetaTrader 5/terminal64.exe'
+    mt5setup_url="https://download.mql5.com/cdn/web/ftmo.s.r/mt5/ftmo5setup.exe"
+    show_message "Using FTMO MT5."
+fi
 WINEPREFIX='/config/.wine'
 wine_executable="wine"
 metatrader_version="5.0.36"
 mt5server_port="8001"
 mono_url="https://dl.winehq.org/wine/wine-mono/8.0.0/wine-mono-8.0.0-x86.msi"
 python_url="https://www.python.org/ftp/python/3.9.0/python-3.9.0.exe"
-mt5setup_url="https://download.mql5.com/cdn/web/ftmo.s.r/mt5/ftmo5setup.exe"
-
-# Function to display a graphical message
-show_message() {
-    echo $1
-}
 
 # Function to check if a dependency is installed
 check_dependency() {
